@@ -8,8 +8,7 @@ load_dotenv()
 
 # an app token registered with the Accuweather API
 WEATHERSTACK_KEY = os.getenv('WEATHERSTACK_KEY')
-
-CITY = 'Boston'
+LOCATION = os.getenv('LOCATION')
 
 START_DATE = datetime.datetime.now() - datetime.timedelta(days=365)
 
@@ -28,7 +27,7 @@ def main():
     d = START_DATE
     for i in range(0,366):
         date = _get_date_format(d)
-        url = 'http://api.weatherstack.com/historical?access_key={}&units=f&query={}&hourly=0&historical_date={}'.format(WEATHERSTACK_KEY, CITY, date)
+        url = 'http://api.weatherstack.com/historical?access_key={}&units=f&query={}&hourly=0&historical_date={}'.format(WEATHERSTACK_KEY, LOCATION, date)
         data = requests.get(url).json()
         temps[date] = data['historical'][date]['avgtemp']
         d = d + datetime.timedelta(days=1)

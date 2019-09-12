@@ -2,6 +2,7 @@ import json
 import datetime
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 with open('temperatures.json') as f:
     temp_data = json.load(f)
@@ -35,7 +36,7 @@ def main():
     temps = list()
     commits = list()
     X = 366
-    BUCKETS=30
+    BUCKET_SIZE=25
     for i in range(0, X):
         date = _get_date_format(d)
         if date in temp_data:
@@ -49,12 +50,24 @@ def main():
     temps = temps / np.linalg.norm(temps)
     commits = np.asarray(commits)
     commits = commits / np.linalg.norm(commits)
-    for i in range(0, floor(X/BUCKETS)):
 
-
-
-    plt.plot(range(0,X), temps)
-    plt.plot(range(0,X), commits)
+    commit_buckets = list()
+    temp_buckets = list()
+    bucket_total = 0
+    commit_total = 0
+    for i in range(0, math.floor(X / BUCKET_SIZE)):
+        commit_total = 0
+        temp_total = 0
+        for j in range(0, BUCKET_SIZE):
+            commit_total += commits[i * BUCKET_SIZE + j]
+            temp_total += temps[i * BUCKET_SIZE + j]
+        commit_buckets.append(commit_total / BUCKET_SIZE)
+        temp_buckets.append(temp_total / BUCKET_SIZE)
+    plt.plot(range(0,math.floor(X / BUCKET_SIZE)), temp_buckets)
+    plt.plot(range(0,math.floor(X / BUCKET_SIZE)), commit_buckets)
+    plt.gca().legend(('Temperature in Boston', "Alex's git commits"))
+    plt.title("Alex's Productivity vs. Temperature")
+    plt.xlabel('Time (Sept 2018 - Sept 2019)')
     plt.show()
 if __name__ == '__main__':
     main()
