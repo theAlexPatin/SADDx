@@ -1,4 +1,5 @@
-# SAD Diagnostics
+# SADDx
+**Seasonal Affective Disorder Diagnostics** (for developers)
 
 A collection of scripts to fetch git commit counts and temperature data, then compare them over the course of a year.
 
