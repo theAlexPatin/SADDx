@@ -33,7 +33,7 @@ $ pip install -r requirements.txt
 
 `$ python commits.py`
 
-#### Fetch weather data (set your )
+#### Fetch weather data
 
 `$ python weather.py`
 
