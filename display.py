@@ -66,7 +66,7 @@ def main():
     plt.plot(range(0,math.floor(X / BUCKET_SIZE)), temp_buckets)
     plt.plot(range(0,math.floor(X / BUCKET_SIZE)), commit_buckets)
     plt.gca().legend(('Temperature in Boston', "Alex's git commits"))
-    plt.title("Alex's Productivity vs. Temperature")
+    plt.title("Alex's Productivity vs. Temperature in Boston")
     plt.xlabel('Time (Sept 2018 - Sept 2019)')
     plt.show()
 if __name__ == '__main__':
